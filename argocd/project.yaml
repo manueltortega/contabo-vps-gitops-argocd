@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
   # Finalizer that ensures that project is not deleted until it is not referenced by any application
   finalizers:
-    - resources-finalizer.argocd.argoproj.io
+    - argocd.argoproj.io/resources-finalizer
 spec:
   # Project description
   description: 
@@ -26,7 +26,7 @@ metadata:
   name: vps-jmsola-dev
   namespace: argocd
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+  - argocd.argoproj.io/resources-finalizer
 spec:
   project: vps-jmsola-dev-project
   destination:
