@@ -11,9 +11,16 @@ spec:
   project: vps-jmsola-dev-project
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: argocd-image-updater
   sources: 
     - chart: argocd-image-updater
+      helm:
+        values: |
+          argocd:
+            namespace: argocd
+          logLevel: info
+          config:
+            refresh: 60s
       repoURL: https://argoproj.github.io/argo-helm
       targetRevision: 0.12.2
   syncPolicy:
