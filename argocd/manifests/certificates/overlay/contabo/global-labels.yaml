@@ -1,0 +1,10 @@
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: global-labels
+labels:
+  app.kubernetes.io/component: cert-manager
+  app.kubernetes.io/managed-by: argocd
+fieldSpecs:
+- path: metadata/labels
+  create: true

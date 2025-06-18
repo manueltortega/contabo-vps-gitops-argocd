@@ -1,0 +1,10 @@
+resources: 
+- ../../base
+
+namespace: cert-manager
+
+patchesStrategicMerge:
+- patch-cluster-issuer.yaml
+
+transformers:
+- global-labels.yaml

@@ -1,0 +1,8 @@
+resources:
+  - cluster-roles.yaml
+  - cluster-issuer.yaml
+  - root-certificate.yaml
+  - crypto-stop-loss-bot-certificate.yaml
+  
+
+

@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: root-certificate
+  labels:
+    app.kubernetes.io/name: root-certificate
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-options: Prune=true
+spec:
+  secretName: vps-jmsola-dev-cert-secret
+  commonName: "vps.jmsola.dev"
+  issuerRef: 
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+    group: cert-manager.io
+  dnsNames:
+    - "vps.jmsola.dev"
+  # TODO: Uncomment the secretTemplate section if you want to enable reflection for this certificate
+  # secretTemplate:
+  #   annotations:
+  #     reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+  #     reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "wordpress"  # Control destination namespaces
+  #     reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true" # Auto create reflection for matching namespaces
+  #     reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "wordpress" # Control auto-reflection namespaces
