@@ -13,7 +13,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: cert-manager
   source: 
-    path: argocd/manifests/certificates/overlay/ionos
+    path: argocd/manifests/certificates/overlay/contabo
     repoURL: https://github.com/jsoladur/contabo-vps-gitops-argocd.git
     targetRevision: main
   syncPolicy:
