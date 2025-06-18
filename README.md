@@ -1,5 +1,23 @@
 # `vps.jmsola.dev` – Personal Project Hosting Environment
 
+- [`vps.jmsola.dev` – Personal Project Hosting Environment](#vpsjmsoladev--personal-project-hosting-environment)
+  - [Overview](#overview)
+  - [📦 Prerequisites](#-prerequisites)
+  - [🚀 Installation](#-installation)
+    - [1. Connect to the VPS](#1-connect-to-the-vps)
+    - [2. Install K3s (Lightweight Kubernetes)](#2-install-k3s-lightweight-kubernetes)
+    - [3. Configure Remote `kubectl` Access](#3-configure-remote-kubectl-access)
+      - [3.1. Export K3s Config File from VPS](#31-export-k3s-config-file-from-vps)
+      - [3.2. Use KUBECONFIG](#32-use-kubeconfig)
+  - [📥 ArgoCD Installation](#-argocd-installation)
+    - [1. Install ArgoCD on the Cluster](#1-install-argocd-on-the-cluster)
+    - [2. Access the ArgoCD UI](#2-access-the-argocd-ui)
+    - [3. Configure ArgoCD CLI and Deploy a Project](#3-configure-argocd-cli-and-deploy-a-project)
+    - [4. Install `kubeseal` for Managing Sealed Secrets](#4-install-kubeseal-for-managing-sealed-secrets)
+  - [🧭 Next Steps](#-next-steps)
+  - [🛡️ License](#️-license)
+
+
 ## Overview
 
 This repository documents the setup process for provisioning and managing a personal VPS (`vps.jmsola.dev`) using [K3s](https://k3s.io/) and [ArgoCD](https://argo-cd.readthedocs.io/en/stable/). The goal is to maintain a lightweight, production-ready Kubernetes environment for hosting and deploying personal side projects.
