@@ -1,0 +1,155 @@
+# `vps.jmsola.dev` – Personal Project Hosting Environment
+
+## Overview
+
+This repository documents the setup process for provisioning and managing a personal VPS (`vps.jmsola.dev`) using [K3s](https://k3s.io/) and [ArgoCD](https://argo-cd.readthedocs.io/en/stable/). The goal is to maintain a lightweight, production-ready Kubernetes environment for hosting and deploying personal side projects.
+
+---
+
+## 📦 Prerequisites
+
+- A VPS instance with root access (e.g., via SSH).
+- [kubectl](https://kubernetes.io/docs/tasks/tools/) installed locally.
+- [Homebrew](https://brew.sh) for installing CLI tools (on macOS).
+- A GitHub Personal Access Token with repo access (for ArgoCD integration).
+- Local `~/.kube` directory for storing Kubernetes config files.
+
+---
+
+## 🚀 Installation
+
+### 1. Connect to the VPS
+
+```bash
+ssh root@vps.jmsola.dev
+```
+
+---
+
+### 2. Install K3s (Lightweight Kubernetes)
+
+Install K3s with custom TLS SANs to support domain and IP access:
+
+```bash
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--tls-san vps.jmsola.dev --tls-san 207.180.239.230" sh -s -
+```
+
+Open necessary ports for Kubernetes API and HTTP/HTTPS traffic:
+
+```bash
+apt update && apt install -y netfilter-persistent
+
+iptables -I INPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT
+iptables -I INPUT -p tcp --dport 443 -m state --state NEW -j ACCEPT
+iptables -I INPUT -p tcp --dport 6443 -m state --state NEW -j ACCEPT
+
+netfilter-persistent save
+```
+
+---
+
+### 3. Configure Remote `kubectl` Access
+
+#### 3.1. Export K3s Config File from VPS
+
+On the VPS:
+
+```bash
+sudo cat /etc/rancher/k3s/k3s.yaml
+```
+
+Copy the output to your local machine and save it as:
+
+```bash
+~/.kube/vps.jmsola.dev_k3s-config.yaml
+```
+
+#### 3.2. Use KUBECONFIG
+
+On your local machine:
+
+```bash
+export KUBECONFIG=$HOME/.kube/vps.jmsola.dev_k3s-config.yaml
+```
+
+You can now run `kubectl` commands against your K3s cluster.
+
+---
+
+## 📥 ArgoCD Installation
+
+### 1. Install ArgoCD on the Cluster
+
+```bash
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+---
+
+### 2. Access the ArgoCD UI
+
+Retrieve the admin password:
+
+```bash
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | pbcopy
+```
+
+Port-forward the ArgoCD dashboard locally:
+
+```bash
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+Visit [https://localhost:8080](https://localhost:8080) and log in as `admin` using the password above.
+
+---
+
+### 3. Configure ArgoCD CLI and Deploy a Project
+
+Install and configure the ArgoCD CLI:
+
+```bash
+brew install argocd
+export ARGOCD_OPTS='--insecure --port-forward-namespace argocd'
+argocd login vps.jmsola.dev
+```
+
+Add your GitHub repository:
+
+```bash
+export GITHUB_USERNAME=jsoladur
+export GITHUB_PERSONAL_ACCESS_TOKEN=<your_personal_access_token>
+
+argocd repo add https://github.com/jsoladur/contabo-vps-gitops-argocd.git \
+  --username $GITHUB_USERNAME \
+  --password $GITHUB_PERSONAL_ACCESS_TOKEN
+
+kubectl apply -f argocd/project.yaml
+```
+
+> ℹ️ You can create a GitHub Personal Access Token [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+
+---
+
+### 4. Install `kubeseal` for Managing Sealed Secrets
+
+To support encrypted Kubernetes secrets via the Sealed Secrets controller:
+
+```bash
+brew install kubeseal
+```
+
+---
+
+## 🧭 Next Steps
+
+- Configure ArgoCD applications via GitOps.
+- Deploy your side projects into isolated namespaces.
+- Set up monitoring, backups, and TLS certificates (e.g., with Cert-Manager and Let's Encrypt).
+
+---
+
+## 🛡️ License
+
+This setup is intended for personal use. Feel free to fork and adapt it to suit your own deployment needs.
