@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: crypto-stop-loss-bot
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`crypto-bot.vps.jmsola.dev`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: crypto-bot.vps.jmsola.dev
+      port: http
+  tls:
+    secretName: crypto-bot-vps-jmsola-dev-cert-secret
+    

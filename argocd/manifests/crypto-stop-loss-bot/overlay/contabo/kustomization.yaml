@@ -1,3 +1,5 @@
 resources: 
 - ../../base
+- ingress-route.yaml
+
 namespace: crypto-stop-loss-bot
