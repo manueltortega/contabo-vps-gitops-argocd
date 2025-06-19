@@ -3,3 +3,9 @@ resources:
 - ingress-route.yaml
 
 namespace: crypto-stop-loss-bot
+
+patches:
+  - path: add-deployment-env-vars.yaml
+    target:
+      kind: Deployment
+      name: crypto-stop-loss-bot
