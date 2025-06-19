@@ -14,6 +14,7 @@
     - [2. Access the ArgoCD UI](#2-access-the-argocd-ui)
     - [3. Configure ArgoCD CLI and Deploy a Project](#3-configure-argocd-cli-and-deploy-a-project)
     - [4. Install `kubeseal` for Managing Sealed Secrets](#4-install-kubeseal-for-managing-sealed-secrets)
+    - [4. Install `Crypto Stop Loss` application](#4-install-crypto-stop-loss-application)
   - [🧭 Next Steps](#-next-steps)
   - [🛡️ License](#️-license)
 
@@ -158,7 +159,40 @@ To support encrypted Kubernetes secrets via the Sealed Secrets controller:
 brew install kubeseal
 ```
 
----
+Once you have installed kubeseal, we have to download the private key locally for being able to encrypt/decrypt secrets. 
+
+```bash
+kubeseal \
+  --controller-name=sealed-secrets \
+  --controller-namespace=toolbox \
+  --fetch-cert > $HOME/.kube/vps-jmsola-dev-sealed-secrets.cert
+```
+
+### 4. Install `Crypto Stop Loss` application
+
+To install Crypto Stop Loss application, we have to encrypt the `SealedSecret` properly. Therefore, it's needed to execute the following commands: 
+
+```bash
+export GOOGLE_OAUTH_CLIENT_ID=<value>
+export GOOGLE_OAUTH_CLIENT_SECRET=<value>
+export TELEGRAM_BOT_TOKEN=<value>
+export BIT2ME_API_KEY=<value>
+export BIT2ME_API_SECRET=<value>
+
+kubectl create secret generic crypto-stop-loss-bot \
+  --from-literal=google.oauth.client.id=${GOOGLE_OAUTH_CLIENT_ID} \
+  --from-literal=google.oauth.client.secret=${GOOGLE_OAUTH_CLIENT_SECRET} \
+  --from-literal=telegram.bot.token=${TELEGRAM_BOT_TOKEN} \
+  --from-literal=bit2me.api.key=${BIT2ME_API_KEY} \
+  --from-literal=bit2me.api.secret=${BIT2ME_API_SECRET} \
+  --namespace=crypto-stop-loss-bot \
+  --dry-run=client -o yaml |
+kubeseal \
+  --format=yaml \
+  --cert=$HOME/.kube/vps-jmsola-dev-sealed-secrets.cert > ./argocd/manifests/crypto-stop-loss-bot/base/secret.yaml
+```
+
+It allows to copy at clipboard the output of the encrypted secret. Then, 
 
 ## 🧭 Next Steps
 
