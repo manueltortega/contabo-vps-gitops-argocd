@@ -9,7 +9,7 @@ spec:
   - match: Host(`crypto-bot.vps.jmsola.dev`) && PathPrefix(`/`)
     kind: Rule
     services:
-    - name: crypto-bot.vps.jmsola.dev
+    - name: crypto-stop-loss-bot
       port: http
   tls:
     secretName: crypto-bot-vps-jmsola-dev-cert-secret
