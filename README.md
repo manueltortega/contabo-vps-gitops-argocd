@@ -14,7 +14,8 @@
     - [2. Access the ArgoCD UI](#2-access-the-argocd-ui)
     - [3. Configure ArgoCD CLI and Deploy a Project](#3-configure-argocd-cli-and-deploy-a-project)
     - [4. Install `kubeseal` for Managing Sealed Secrets](#4-install-kubeseal-for-managing-sealed-secrets)
-    - [4. Install `Crypto Stop Loss` application](#4-install-crypto-stop-loss-application)
+    - [5. Give to `argocd-image-updater` our GitHub credentials](#5-give-to-argocd-image-updater-our-github-credentials)
+    - [6. Install `Crypto Stop Loss` application](#6-install-crypto-stop-loss-application)
   - [🧭 Next Steps](#-next-steps)
   - [🛡️ License](#️-license)
 
@@ -168,7 +169,24 @@ kubeseal \
   --fetch-cert > $HOME/.kube/vps-jmsola-dev-sealed-secrets.cert
 ```
 
-### 4. Install `Crypto Stop Loss` application
+
+### 5. Give to `argocd-image-updater` our GitHub credentials
+
+```bash
+export GITHUB_USERNAME=jsoladur
+export GITHUB_PERSONAL_ACCESS_TOKEN=<your_personal_access_token>
+
+kubectl create secret generic github-creds \
+  --from-literal=github.username=${GITHUB_USERNAME} \
+  --from-literal=github.password=${GITHUB_PERSONAL_ACCESS_TOKEN} \
+  --namespace=argocd-image-updater \
+  --dry-run=client -o yaml |
+kubeseal \
+  --format=yaml \
+  --cert=$HOME/.kube/vps-jmsola-dev-sealed-secrets.cert > ./argocd/manifests/argocd-image-updater/base/github-creds-secret.yaml
+```
+
+### 6. Install `Crypto Stop Loss` application
 
 To install Crypto Stop Loss application, we have to encrypt the `SealedSecret` properly. Therefore, it's needed to execute the following commands: 
 
