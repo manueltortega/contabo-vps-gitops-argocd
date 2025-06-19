@@ -177,8 +177,8 @@ export GITHUB_USERNAME=jsoladur
 export GITHUB_PERSONAL_ACCESS_TOKEN=<your_personal_access_token>
 
 kubectl create secret generic github-creds \
-  --from-literal=github.username=${GITHUB_USERNAME} \
-  --from-literal=github.password=${GITHUB_PERSONAL_ACCESS_TOKEN} \
+  --from-literal=username=${GITHUB_USERNAME} \
+  --from-literal=password=${GITHUB_PERSONAL_ACCESS_TOKEN} \
   --namespace=argocd-image-updater \
   --dry-run=client -o yaml |
 kubeseal \
