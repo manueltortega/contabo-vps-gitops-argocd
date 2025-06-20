@@ -1,3 +1,0 @@
-kustomize:
-  images:
-  - docker.io/josemariasoladuran/crypto-stop-loss-bot:0.1.1
