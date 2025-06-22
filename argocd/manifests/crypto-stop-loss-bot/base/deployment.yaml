@@ -26,7 +26,7 @@ spec:
             - name: CORS_ENABLED
               value: "false"
             - name: TELEGRAM_BOT_ENABLED
-              value: "true"
+              value: "false"
             - name: BACKGROUND_TASKS_ENABLED
               value: "true"
             - name: DATABASE_IN_MEMORY
