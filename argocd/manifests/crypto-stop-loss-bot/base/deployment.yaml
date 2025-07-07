@@ -62,11 +62,11 @@ spec:
                   key: bit2me.api.secret
           resources:
             requests:
-              memory: "256Mi"
+              memory: "512Mi"
               cpu: "250m"
             limits:
               cpu: "2"
-              memory: "1Gi"
+              memory: "2Gi"
           readinessProbe:
             httpGet:
               path: /health/status
