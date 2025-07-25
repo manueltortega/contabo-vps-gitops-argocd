@@ -166,7 +166,7 @@ Once you have installed kubeseal, we have to download the private key locally fo
 kubeseal \
   --controller-name=sealed-secrets \
   --controller-namespace=toolbox \
-  --fetch-cert > $HOME/.kube/nas-manueltortega-dev-sealed-secrets.cert
+  --fetch-cert > $HOME/.kube/vps-plagasagricolas-es-sealed-secrets.cert
 ```
 
 
@@ -183,7 +183,7 @@ kubectl create secret generic github-creds \
   --dry-run=client -o yaml |
 kubeseal \
   --format=yaml \
-  --cert=$HOME/.kube/nas-manueltortega-dev-sealed-secrets.cert > ./argocd/manifests/argocd-image-updater/base/github-creds-secret.yaml
+  --cert=$HOME/.kube/vps-plagasagricolas-es-sealed-secrets.cert > ./argocd/manifests/argocd-image-updater/base/github-creds-secret.yaml
 ```
 
 ### 6. Install `Crypto Stop Loss` application
@@ -207,7 +207,7 @@ kubectl create secret generic crypto-stop-loss-bot \
   --dry-run=client -o yaml |
 kubeseal \
   --format=yaml \
-  --cert=$HOME/.kube/nas-manueltortega-dev-sealed-secrets.cert > ./argocd/manifests/crypto-stop-loss-bot/base/secret.yaml
+  --cert=$HOME/.kube/vps-plagasagricolas-es-sealed-secrets.cert > ./argocd/manifests/crypto-stop-loss-bot/base/secret.yaml
 ```
 
 It allows to copy at clipboard the output of the encrypted secret. Then, 

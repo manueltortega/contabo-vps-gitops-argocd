@@ -8,7 +8,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
     argocd.argoproj.io/sync-options: Prune=true
 spec:
-  secretName: crypto-bot-nas-manueltortega-dev-cert-secret
+  secretName: crypto-bot-vps-plagasagricolas-es-cert-secret
   commonName: "crypto-bot.vps.plagasagricolas.es"
   issuerRef: 
     kind: ClusterIssuer
