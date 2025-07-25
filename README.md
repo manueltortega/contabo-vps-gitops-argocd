@@ -1,6 +1,6 @@
-# `vps.jmsola.dev` – Personal Project Hosting Environment
+# `vps.plagasagricolas.es` – Personal Project Hosting Environment
 
-- [`vps.jmsola.dev` – Personal Project Hosting Environment](#vpsjmsoladev--personal-project-hosting-environment)
+- [`vps.plagasagricolas.es` – Personal Project Hosting Environment](#vpsplagasagricolases--personal-project-hosting-environment)
   - [Overview](#overview)
   - [📦 Prerequisites](#-prerequisites)
   - [🚀 Installation](#-installation)
@@ -22,7 +22,7 @@
 
 ## Overview
 
-This repository documents the setup process for provisioning and managing a personal VPS (`vps.jmsola.dev`) using [K3s](https://k3s.io/) and [ArgoCD](https://argo-cd.readthedocs.io/en/stable/). The goal is to maintain a lightweight, production-ready Kubernetes environment for hosting and deploying personal side projects.
+This repository documents the setup process for provisioning and managing a personal VPS (`vps.plagasagricolas.es`) using [K3s](https://k3s.io/) and [ArgoCD](https://argo-cd.readthedocs.io/en/stable/). The goal is to maintain a lightweight, production-ready Kubernetes environment for hosting and deploying personal side projects.
 
 ---
 
@@ -41,7 +41,7 @@ This repository documents the setup process for provisioning and managing a pers
 ### 1. Connect to the VPS
 
 ```bash
-ssh root@vps.jmsola.dev
+ssh root@vps.plagasagricolas.es
 ```
 
 ---
@@ -51,7 +51,7 @@ ssh root@vps.jmsola.dev
 Install K3s with custom TLS SANs to support domain and IP access:
 
 ```bash
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--tls-san vps.jmsola.dev --tls-san 207.180.239.230" sh -s -
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--tls-san vps.plagasagricolas.es --tls-san 37.60.229.213" sh -s -
 ```
 
 Open necessary ports for Kubernetes API and HTTP/HTTPS traffic:
@@ -81,7 +81,7 @@ sudo cat /etc/rancher/k3s/k3s.yaml
 Copy the output to your local machine and save it as:
 
 ```bash
-~/.kube/vps.jmsola.dev_k3s-config.yaml
+~/.kube/vps.plagasagricolas.es_k3s-config.yaml
 ```
 
 #### 3.2. Use KUBECONFIG
@@ -89,7 +89,7 @@ Copy the output to your local machine and save it as:
 On your local machine:
 
 ```bash
-export KUBECONFIG=$HOME/.kube/vps.jmsola.dev_k3s-config.yaml
+export KUBECONFIG=$HOME/.kube/vps.plagasagricolas.es_k3s-config.yaml
 ```
 
 You can now run `kubectl` commands against your K3s cluster.
@@ -132,7 +132,7 @@ Install and configure the ArgoCD CLI:
 ```bash
 brew install argocd
 export ARGOCD_OPTS='--insecure --port-forward-namespace argocd'
-argocd login vps.jmsola.dev
+argocd login vps.plagasagricolas.es
 ```
 
 Add your GitHub repository:

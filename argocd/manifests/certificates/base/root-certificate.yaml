@@ -9,13 +9,13 @@ metadata:
     argocd.argoproj.io/sync-options: Prune=true
 spec:
   secretName: nas-manueltortega-dev-cert-secret
-  commonName: "vps.jmsola.dev"
+  commonName: "vps.plagasagricolas.es"
   issuerRef: 
     kind: ClusterIssuer
     name: letsencrypt-prod
     group: cert-manager.io
   dnsNames:
-    - "vps.jmsola.dev"
+    - "vps.plagasagricolas.es"
   # TODO: Uncomment the secretTemplate section if you want to enable reflection for this certificate
   # secretTemplate:
   #   annotations:

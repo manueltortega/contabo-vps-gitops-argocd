@@ -13,7 +13,7 @@ metadata:
   name: cert-manager-operator:domain-solver
 rules:
   - apiGroups:
-      - vps.jmsola.dev
+      - vps.plagasagricolas.es
     resources:
       - '*'
     verbs:
