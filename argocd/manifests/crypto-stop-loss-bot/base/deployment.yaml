@@ -36,7 +36,7 @@ spec:
             - name: BIT2ME_API_BASE_URL
               value: "https://gateway.bit2me.com"
             - name: AUTHORIZED_GOOGLE_USER_EMAILS_COMMA_SEPARATED
-              value: "josemaria.sola.duran@gmail.com,jmsola3092@gmail.com"
+              value: "manuelt.ortega@gmail.com"
             - name: GOOGLE_OAUTH_CLIENT_ID
               valueFrom:
                 secretKeyRef:

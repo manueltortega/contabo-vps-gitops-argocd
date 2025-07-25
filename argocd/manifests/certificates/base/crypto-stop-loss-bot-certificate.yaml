@@ -9,13 +9,13 @@ metadata:
     argocd.argoproj.io/sync-options: Prune=true
 spec:
   secretName: crypto-bot-vps-plagasagricolas-es-cert-secret
-  commonName: "crypto-bot.vps.plagasagricolas.es"
+  commonName: "bot.vps.plagasagricolas.es"
   issuerRef: 
     kind: ClusterIssuer
     name: letsencrypt-prod
     group: cert-manager.io
   dnsNames:
-    - "crypto-bot.vps.plagasagricolas.es"
+    - "bot.vps.plagasagricolas.es"
   secretTemplate:
     annotations:
       reflector.v1.k8s.emberstack.com/reflection-allowed: "true"

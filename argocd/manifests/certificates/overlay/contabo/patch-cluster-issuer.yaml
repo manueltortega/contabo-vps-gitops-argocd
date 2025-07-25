@@ -6,4 +6,4 @@ spec:
   acme:
     # The ACME server URL
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: 'josemaria.sola.duran@gmail.com'
+    email: 'manuelt.ortega@gmail.com'

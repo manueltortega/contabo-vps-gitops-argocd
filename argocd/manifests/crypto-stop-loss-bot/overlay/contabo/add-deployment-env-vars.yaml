@@ -10,4 +10,4 @@ spec:
         - name: crypto-stop-loss-bot
           env:
             - name: PUBLIC_DOMAIN
-              value: "https://crypto-bot.vps.plagasagricolas.es"
+              value: "https://bot.vps.plagasagricolas.es"
