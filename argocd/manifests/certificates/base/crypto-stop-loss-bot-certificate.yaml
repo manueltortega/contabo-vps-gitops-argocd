@@ -8,7 +8,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
     argocd.argoproj.io/sync-options: Prune=true
 spec:
-  secretName: crypto-bot-vps-jmsola-dev-cert-secret
+  secretName: crypto-bot-nas-manueltortega-dev-cert-secret
   commonName: "crypto-bot.vps.jmsola.dev"
   issuerRef: 
     kind: ClusterIssuer

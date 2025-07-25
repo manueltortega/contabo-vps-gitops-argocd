@@ -1,21 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: reflector
+  name: certificates
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "-3"
+    argocd.argoproj.io/sync-wave: "1"
   finalizers:
   - argocd.argoproj.io/resources-finalizer
 spec:
-  project: vps-jmsola-dev-project
+  project: nas-manueltortega-dev-project
   destination:
     server: https://kubernetes.default.svc
-    namespace: toolbox
+    namespace: cert-manager
   source: 
-    chart: reflector
-    repoURL: https://emberstack.github.io/helm-charts
-    targetRevision: 9.1.11
+    path: argocd/manifests/certificates/overlay/contabo
+    repoURL: https://github.com/manueltortega/contabo-vps-gitops-argocd.git
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true

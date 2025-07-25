@@ -6,7 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
     # Enable image updater for this application
-    argocd-image-updater.argoproj.io/enable: "true"
+    argocd-image-updater.argoproj.io/enable: "false"
     argocd-image-updater.argoproj.io/update-strategy: semver # to apply for all the images
     argocd-image-updater.argoproj.io/image-list: docker.io/josemariasoladuran/crypto-stop-loss-bot
     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd-image-updater/github-creds
@@ -17,13 +17,13 @@ metadata:
   finalizers:
   - argocd.argoproj.io/resources-finalizer
 spec:
-  project: vps-jmsola-dev-project
+  project: nas-manueltortega-dev-project
   destination:
     server: https://kubernetes.default.svc
     namespace: crypto-stop-loss-bot
   source: 
     path: argocd/manifests/crypto-stop-loss-bot/overlay/contabo
-    repoURL: https://github.com/jsoladur/contabo-vps-gitops-argocd.git
+    repoURL: https://github.com/manueltortega/contabo-vps-gitops-argocd.git
     targetRevision: main
   syncPolicy:
     automated:

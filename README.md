@@ -138,10 +138,10 @@ argocd login vps.jmsola.dev
 Add your GitHub repository:
 
 ```bash
-export GITHUB_USERNAME=jsoladur
+export GITHUB_USERNAME=manueltortega
 export GITHUB_PERSONAL_ACCESS_TOKEN=<your_personal_access_token>
 
-argocd repo add https://github.com/jsoladur/contabo-vps-gitops-argocd.git \
+argocd repo add https://github.com/manueltortega/contabo-vps-gitops-argocd.git \
   --username $GITHUB_USERNAME \
   --password $GITHUB_PERSONAL_ACCESS_TOKEN
 
@@ -166,14 +166,14 @@ Once you have installed kubeseal, we have to download the private key locally fo
 kubeseal \
   --controller-name=sealed-secrets \
   --controller-namespace=toolbox \
-  --fetch-cert > $HOME/.kube/vps-jmsola-dev-sealed-secrets.cert
+  --fetch-cert > $HOME/.kube/nas-manueltortega-dev-sealed-secrets.cert
 ```
 
 
 ### 5. Give to `argocd-image-updater` our GitHub credentials
 
 ```bash
-export GITHUB_USERNAME=jsoladur
+export GITHUB_USERNAME=manueltortega
 export GITHUB_PERSONAL_ACCESS_TOKEN=<your_personal_access_token>
 
 kubectl create secret generic github-creds \
@@ -183,7 +183,7 @@ kubectl create secret generic github-creds \
   --dry-run=client -o yaml |
 kubeseal \
   --format=yaml \
-  --cert=$HOME/.kube/vps-jmsola-dev-sealed-secrets.cert > ./argocd/manifests/argocd-image-updater/base/github-creds-secret.yaml
+  --cert=$HOME/.kube/nas-manueltortega-dev-sealed-secrets.cert > ./argocd/manifests/argocd-image-updater/base/github-creds-secret.yaml
 ```
 
 ### 6. Install `Crypto Stop Loss` application
@@ -207,7 +207,7 @@ kubectl create secret generic crypto-stop-loss-bot \
   --dry-run=client -o yaml |
 kubeseal \
   --format=yaml \
-  --cert=$HOME/.kube/vps-jmsola-dev-sealed-secrets.cert > ./argocd/manifests/crypto-stop-loss-bot/base/secret.yaml
+  --cert=$HOME/.kube/nas-manueltortega-dev-sealed-secrets.cert > ./argocd/manifests/crypto-stop-loss-bot/base/secret.yaml
 ```
 
 It allows to copy at clipboard the output of the encrypted secret. Then, 

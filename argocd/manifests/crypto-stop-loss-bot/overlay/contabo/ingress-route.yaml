@@ -12,5 +12,5 @@ spec:
     - name: crypto-stop-loss-bot
       port: http
   tls:
-    secretName: crypto-bot-vps-jmsola-dev-cert-secret
+    secretName: crypto-bot-nas-manueltortega-dev-cert-secret
     

@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: vps-jmsola-dev-project
+  name: nas-manueltortega-dev-project
   namespace: argocd
   # Finalizer that ensures that project is not deleted until it is not referenced by any application
   finalizers:
@@ -23,18 +23,18 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vps-jmsola-dev
+  name: nas-manueltortega-dev
   namespace: argocd
   finalizers:
   - argocd.argoproj.io/resources-finalizer
 spec:
-  project: vps-jmsola-dev-project
+  project: nas-manueltortega-dev-project
   destination:
     server: https://kubernetes.default.svc
-    namespace: vps-jmsola-dev
+    namespace: nas-manueltortega-dev
   source:
     path: argocd/apps
-    repoURL: https://github.com/jsoladur/contabo-vps-gitops-argocd.git
+    repoURL: https://github.com/manueltortega/contabo-vps-gitops-argocd.git
     targetRevision: main
   syncPolicy:
     automated:
