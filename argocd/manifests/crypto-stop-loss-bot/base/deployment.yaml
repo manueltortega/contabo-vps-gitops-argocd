@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: crypto-stop-loss-bot
-          image: docker.io/josemariasoladuran/crypto-stop-loss-bot:0.29.9
+          image: docker.io/josemariasoladuran/crypto-stop-loss-bot:0.30.0
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
