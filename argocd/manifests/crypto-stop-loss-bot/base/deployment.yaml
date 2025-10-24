@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: crypto-stop-loss-bot
-          image: docker.io/josemariasoladuran/crypto-stop-loss-bot:0.46.3
+          image: docker.io/josemariasoladuran/crypto-stop-loss-bot:0.47.5
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -34,8 +34,12 @@ spec:
               value: "false"
             - name: DATABASE_PATH
               value: "/app/db/crypto_stop_loss.sqlite"
+            - name: OPERATING_EXCHANGE
+              value: "bit2me"
             - name: BIT2ME_API_BASE_URL
               value: "https://gateway.bit2me.com"
+            - name: MEXC_API_BASE_URL
+              value: "https://api.mexc.com"
             - name: AUTHORIZED_GOOGLE_USER_EMAILS_COMMA_SEPARATED
               value: "manuelt.ortega@gmail.com"
             - name: GOOGLE_OAUTH_CLIENT_ID
@@ -63,6 +67,18 @@ spec:
                 secretKeyRef:
                   name: crypto-stop-loss-bot
                   key: bit2me.api.secret
+            - name: MEXC_API_KEY
+              value: ""
+              # valueFrom:
+              #   secretKeyRef:
+              #     name: crypto-stop-loss-bot
+              #     key: mexc.api.key
+            - name: MEXC_API_SECRET
+              value: ""
+              # valueFrom:
+              #   secretKeyRef:
+              #     name: crypto-stop-loss-bot
+              #     key: mexc.api.secret
           resources:
             limits:
               memory: "4Gi"
