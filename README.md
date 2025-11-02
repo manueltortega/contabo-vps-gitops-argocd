@@ -196,6 +196,8 @@ export GOOGLE_OAUTH_CLIENT_SECRET=<value>
 export TELEGRAM_BOT_TOKEN=<value>
 export BIT2ME_API_KEY=<value>
 export BIT2ME_API_SECRET=<value>
+export MEXC_API_KEY=<value>
+export MEXC_API_SECRET=<value>
 
 kubectl create secret generic crypto-stop-loss-bot \
   --from-literal=google.oauth.client.id=${GOOGLE_OAUTH_CLIENT_ID} \
@@ -203,6 +205,8 @@ kubectl create secret generic crypto-stop-loss-bot \
   --from-literal=telegram.bot.token=${TELEGRAM_BOT_TOKEN} \
   --from-literal=bit2me.api.key=${BIT2ME_API_KEY} \
   --from-literal=bit2me.api.secret=${BIT2ME_API_SECRET} \
+  --from-literal=mexc.api.key=${MEXC_API_KEY} \
+  --from-literal=mexc.api.secret=${MEXC_API_SECRET} \
   --namespace=crypto-stop-loss-bot \
   --dry-run=client -o yaml |
 kubeseal \
