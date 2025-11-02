@@ -35,7 +35,7 @@ spec:
             - name: DATABASE_PATH
               value: "/app/db/crypto_stop_loss.sqlite"
             - name: OPERATING_EXCHANGE
-              value: "bit2me"
+              value: "mexc"
             - name: BIT2ME_API_BASE_URL
               value: "https://gateway.bit2me.com"
             - name: MEXC_API_BASE_URL
@@ -68,17 +68,15 @@ spec:
                   name: crypto-stop-loss-bot
                   key: bit2me.api.secret
             - name: MEXC_API_KEY
-              value: ""
-              # valueFrom:
-              #   secretKeyRef:
-              #     name: crypto-stop-loss-bot
-              #     key: mexc.api.key
+              valueFrom:
+                secretKeyRef:
+                  name: crypto-stop-loss-bot
+                  key: mexc.api.key
             - name: MEXC_API_SECRET
-              value: ""
-              # valueFrom:
-              #   secretKeyRef:
-              #     name: crypto-stop-loss-bot
-              #     key: mexc.api.secret
+              valueFrom:
+                secretKeyRef:
+                  name: crypto-stop-loss-bot
+                  key: mexc.api.secret
           resources:
             limits:
               memory: "4Gi"
